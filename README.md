@@ -1,6 +1,6 @@
 # NFive Chat Plugin
 [![License](https://img.shields.io/github/license/CroneFacade/plugin-chat.svg)](LICENSE)
-[![Build Status](https://img.shields.io/appveyor/ci/CroneFacade/plugin-chat/main.svg)](https://ci.appveyor.com/project/CroneFacade/plugin-chat)
+[![Build Status](https://img.shields.io/appveyor/build/CroneFacade/plugin-chat/master.svg)](https://ci.appveyor.com/project/CroneFacade/plugin-chat)
 [![Release Version](https://img.shields.io/github/release/CroneFacade/plugin-chat/all.svg)](https://github.com/CroneFacade/plugin-chat/releases)
 
 Basic player chat system
