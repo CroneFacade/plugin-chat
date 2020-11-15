@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
@@ -60,7 +61,7 @@ namespace NFive.Chat.Client
 			this.Comms.Event(ChatEvents.ChatMessage).FromServer().On<ChatMessage>(ChatMessage);
 
 			// Attach a tick handler
-			this.Ticks.On(ChatTick);
+			this.Ticks.On((Action)ChatTick);
 		}
 
 		private void ChatTick()
