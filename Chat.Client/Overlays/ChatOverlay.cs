@@ -13,12 +13,14 @@ namespace NFive.Chat.Client.Overlays
 		public Dictionary<string, string> Templates = new Dictionary<string, string>();
 
 		public event EventHandler<MessageEventArgs> MessageEntered;
+		public event EventHandler<MessageEventArgs> ExportHandler;
 
 		public ChatOverlay(IOverlayManager manager, int historyLimit) : base(manager)
 		{
 			this.historyLimit = historyLimit;
 
 			On("message", new Action<string>(message => this.MessageEntered?.Invoke(this, new MessageEventArgs(this, message))));
+			On("export", new Action<string>(message => this.ExportHandler?.Invoke(this, new MessageEventArgs(this, message))));
 
 			On("blur", Blur);
 		}

@@ -68,6 +68,9 @@
     <Compile Include="ChatService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Overlays\plugin-chat.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +83,9 @@
   <ItemGroup>
     <Content Include="Overlays\ChatOverlay.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Overlays\plugin-chat.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

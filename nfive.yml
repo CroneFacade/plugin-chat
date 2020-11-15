@@ -16,3 +16,5 @@ client:
   - NFive.Chat.Shared
   files:
   - Overlays/ChatOverlay.html
+  - Overlays/plugin-chat.js
+  - Overlays/plugin-chat.css

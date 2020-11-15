@@ -1,208 +1,33 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js" integrity="sha256-dW8u4dvEKDThJpWRwLgGugbARnA3O2wqBcVerlg9LMc=" crossorigin="anonymous"></script>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+	<link rel="stylesheet" href="plugin-chat.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js" integrity="sha256-dW8u4dvEKDThJpWRwLgGugbARnA3O2wqBcVerlg9LMc=" crossorigin="anonymous"></script>
+	<script src="plugin-chat.js" type="text/javascript"></script>
 
-		<style type="text/css">
-			body {
-				overflow: hidden;
-				font-size: 1.3vh;
-				background-color: transparent;
-			}
 
-			main {
-				width: 20vw;
-				height: 30vh;
-				margin: 1vw;
-			}
 
-			#messages {
-				height: 85%;
-				position: relative;
-				overflow-x: hidden;
-				overflow-y: scroll;
-			}
+</head>
+<body>
+	<main>
+		<section id="messages">
+			
+			
+		</section>
 
-			#messages article {
-				position: relative;
-				margin-bottom: 1rem;
-				padding: 0.5rem 1rem;
-				border: 1px solid transparent;
-				border-radius: 0.25rem;
-			}
-			#messages article:last-of-type {
-				margin-bottom: 0;
-			}
-
-			#messages article h1 {
-				margin: 0.25rem 0;
-				font-size: inherit;
-				font-weight: 700;
-			}
-
-			#input {
-				margin-top: 1vh;
-			}
-
-			#input textarea {
-				max-height: 33vh;
-				padding: 0.5em 0.75em;
-				resize: none;
-			}
-
-			.form-control {
-				font-size: inherit;
-			}
-			.form-control:focus {
-				box-shadow: none;
-				border-color: #ced4da;
-			}
-
-			::-webkit-scrollbar {
-				display: none;
-			}
-		</style>
-
-		<script>
-			nfive.on('ready', (config) => {
-				const $window = $('main');
-				const $input = $('#input');
-				const $textarea = $('textarea');
-				let timer = null;
-
-				const hide = () => {
-					clearTimeout(timer);
-
-					nfive.send('blur');
-
-					$window.stop().fadeOut(250);
-					$input.hide();
-				};
-
-				const show = (input, timeout = false) => {
-					clearTimeout(timer);
-
-					if (input) $input.show();
-                    $window.stop().fadeIn(50);
-					$textarea.focus();
-
-					if (timeout) {
-						timer = setTimeout(hide, 5000);
-					}
-				};
-
-                $window.stop().fadeOut(0);
-
-                nfive.show();
-
-				autosize($textarea);
-
-				nfive.on('open', () => {
-					show(true);
-				});
-
-				const history = [];
-				let historyPos = 0;
-				let historyLive = true;
-				let historyCurrent = '';
-
-				$(document).keydown((e) => {
-					switch (e.key) {
-						case 'Tab':
-							e.preventDefault();
-							break;
-						case 'Escape':
-							hide();
-							break;
-						case 'PageUp':
-							$('#messages').scrollTop($('#messages').scrollTop() - ($('#messages').height() / 2));
-							break;
-						case 'PageDown':
-							$('#messages').scrollTop($('#messages').scrollTop() + ($('#messages').height() / 2));
-						case 'ArrowUp':
-                            e.preventDefault();
-
-							if (historyLive) {
-								historyCurrent = $textarea.val();
-								historyLive = false;
-							}
-
-							historyPos--;
-							if (historyPos < 0) historyPos = 0;
-
-							$textarea.val(history[historyPos]).focus()[0].setSelectionRange(history[historyPos].length, history[historyPos].length);
-							break;
-						case 'ArrowDown':
-                            e.preventDefault();
-
-							historyPos++;
-
-							if (historyPos > history.length - 1) {
-                                historyPos = history.length;
-
-                                $textarea.val(historyCurrent).focus()[0].setSelectionRange(historyCurrent.length, historyCurrent.length);
-
-								historyLive = true;
-								break;
-							}
-
-							$textarea.val(history[historyPos]).focus()[0].setSelectionRange(history[historyPos].length, history[historyPos].length);
-							break;
-					}
-				});
-
-				nfive.on('add-message', (message) => {
-					$('#messages').append($('<article>').addClass(`alert-${message.style}`).html(message.message));
-
-					$('#messages').scrollTop($('#messages').prop('scrollHeight'));
-
-					show(false, true);
-				});
-
-				$textarea.keydown((e) => {
-					if (e.key !== 'Enter') return;
-
-					if ($textarea.val() !== '') {
-						if (history.length >= config.history) history.shift();
-
-						if (history.length < 1 || history[history.length - 1] !== $textarea.val()) history.push($textarea.val());
-
-						historyPos = history.length;
-						historyCurrent = '';
-
-						nfive.send('message', $textarea.val());
-
-						$textarea.val('');
-					}
-
-					$input.hide();
-					nfive.send('blur');
-				});
-
-				$textarea.blur(() => {
-					$textarea.focus();
-				});
-			});
-		</script>
-	</head>
-
-	<body>
-		<main>
-			<section id="messages"></section>
-
-			<section id="input" class="input-group">
-				<div class="input-group-prepend">
-					<div class="input-group-text">
-						<i class="fas fa-fw fa-comment-dots fa-flip-horizontal"></i>
-					</div>
+		<section id="input" class="input-group">
+			<div class="input-group-prepend">
+				<div class="input-group-text">
+					<i class="fas fa-fw fa-comment-dots fa-flip-horizontal"></i>
 				</div>
-				<textarea class="form-control" rows="1" autofocus spellcheck="true"></textarea>
-			</section>
-		</main>
-	</body>
+			</div>
+			<textarea class="form-control" rows="1" autofocus spellcheck="true"></textarea>
+		</section>
+	</main>
+</body>
 </html>

@@ -1,0 +1,92 @@
+body {
+	overflow: hidden;
+	font-size: 1.3vh;
+	background-color: transparent;
+}
+
+main {
+	width: 40vw;
+	max-width: 1000px; 
+	height: 30vh;
+	margin: 1vw;
+}
+
+#messages {
+	height: 85%;
+	position: relative;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+#messages article {
+	display: inline-block;
+	padding: 0.1rem 0.5rem;
+	border: 1px solid rgba(46,46,46,0.05);
+	border-radius: 0.25rem;
+	background-color:rgba(22, 44, 44, 0.75);
+	color:rgb(230,230,230);
+	padding-right: 15px;
+	padding-bottom: 3px;
+}
+
+.input-group-text {
+	background-color:rgba(21, 97, 97, 1);
+	border: 1px solid rgba(146,146,146,1);
+	padding: 4px;
+	width: 30px;
+}
+
+.alert-separator {
+	color: rgba(230,230,230,0.3);
+}
+
+.input-group-text i{
+	color:white;
+}
+
+.alert-container {
+	margin: 0.1rem;
+	width: 100%;
+	display: block;
+}
+
+
+#messages article:last-of-type {
+	margin-bottom: 0;
+}
+
+#messages article h1 {
+	float: left;
+	margin-top: 2px;
+	margin-bottom: 0;
+	margin-right: 5px;
+	font-size: inherit;
+	font-weight: 700;
+}
+
+#input {
+	margin-top: 1vh;
+}
+
+#input textarea {
+	max-height: 33vh;
+	padding: 0.5em 0.75em;
+	resize: none;
+	border: 1px solid rgba(146,146,146,1)
+}
+
+.form-control {
+	font-size: inherit;
+	background-color:rgba(21, 97, 97, 0.2);
+	color: white;
+}
+
+.form-control:focus {
+	box-shadow: none;
+	background-color:rgb(22, 44, 44);
+	color: white;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}

@@ -11,7 +11,7 @@ namespace NFive.Chat.Shared
 
 		public int HistoryLimit { get; set; } = 50;
 
-		public string DefaultTemplate { get; set; } = "<h1><i class=\"fas fa-fw fa-star\"></i> {0}</h1>{1}";
+		public string DefaultTemplate { get; set; } = "<h1>{0}</h1><i class=\"alert-separator\">|</i> {1}";
 
 		public ChatStyles DefaultStyle { get; set; } = ChatStyles.Secondary;
 	}
